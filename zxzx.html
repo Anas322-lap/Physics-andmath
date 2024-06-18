@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หาค.ร.นและห.ร.ม</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #2fbe3e;
+            color: #fff;
+            padding: 15px 0;
+            width: 100%;
+        }
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+            margin: 0 auto;
+        }
+        .navbar-brand {
+            font-size: 24px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .navbar-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .navbar-item {
+            margin-left: 10px;
+        }
+        .navbar-link {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        .navbar-link:hover {
+            color: #ddd;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+        .credit {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-brand">Physics and math</a>
+            <ul class="navbar-menu">
+                <li class="navbar-item"><a href="index.html" class="navbar-link">หน้าหลัก</a></li>
+                <li class="navbar-item"><a href="zxzx.html" class="navbar-link">หาค.ร.น</a></li>
+                <li class="navbar-item"><a href="asas.html" class="navbar-link">การเปลี่ยนหน่วย</a></li>
+                <li class="navbar-item"><a href="liam.html" class="navbar-link">คำนวณมุมสามเหลี่ยม</a></li>
+                <li class="navbar-item"><a href="pita.html" class="navbar-link">คำนวณสามเหลี่ยมพีธาโกรัส</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>หาค.ร.นและห.ร.ม</h1>
+        <label for="num1">จำนวนเต็มที่ 1:</label>
+        <input type="number" id="num1">
+        <label for="num2">จำนวนเต็มที่ 2:</label>
+        <input type="number" id="num2">
+        <button onclick="calculate()">คำนวณ</button>
+        <div class="result" id="result"></div>
+    </div>
+    <div class="credit">สร้างโดย Anas Masae</div>
+
+    <script>
+        function gcd(a, b) {
+            while (b != 0) {
+                let t = b;
+                b = a % b;
+                a = t;
+            }
+            return a;
+        }
+
+        function lcm(a, b) {
+            return Math.abs(a * b) / gcd(a, b);
+        }
+
+        function calculate() {
+            const num1 = parseInt(document.getElementById('num1').value);
+            const num2 = parseInt(document.getElementById('num2').value);
+
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById('result').innerText = "กรุณาใส่จำนวนเต็มที่ถูกต้อง";
+                return;
+            }
+
+            const gcdResult = gcd(num1, num2);
+            const lcmResult = lcm(num1, num2);
+
+            document.getElementById('result').innerText = `ห.ร.ม ของ ${num1} และ ${num2} คือ: ${gcdResult}\nค.ร.น ของ ${num1} และ ${num2} คือ: ${lcmResult}`;
+        }
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collapsible Sidebar Navigation</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            background-color: #eef2f7;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #4b79a1;
+            padding-top: 20px;
+            transition: width 0.3s;
+            overflow-x: hidden;
+        }
+
+        .sidebar.collapsed {
+            width: 0;
+            padding-top: 0;
+        }
+
+        .sidebar a {
+            padding: 15px 8px 15px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: padding 0.3s, background-color 0.3s;
+        }
+
+        .sidebar.collapsed a {
+            padding-left: 16px;
+        }
+
+        .sidebar a:hover {
+            background-color: #6b9dc0;
+        }
+
+        .sidebar a.active {
+            background-color: #2f507e;
+            color: white;
+        }
+
+        .content {
+            margin-left: 200px;
+            padding: 20px;
+            transition: margin-left 0.3s;
+            width: 100%;
+            background-color: #eef2f7;
+        }
+
+        .content.collapsed {
+            margin-left: 0;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 10px;
+            left: 210px;
+            font-size: 18px;
+            cursor: pointer;
+            color: white;
+            background-color: #4b79a1;
+            padding: 10px 15px;
+            border: none;
+            transition: left 0.3s, background-color 0.3s;
+        }
+
+        .toggle-btn.collapsed {
+            left: 10px;
+        }
+
+        .toggle-btn:hover {
+            background-color: #6b9dc0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="#" class="active" id="home-tab">Home</a>
+        <a href="#" id="about-tab">About</a>
+        <a href="#" id="services-tab">Services</a>
+        <a href="#" id="contact-tab">Contact</a>
+    </div>
+    <button class="toggle-btn" id="toggle-btn">☰</button>
+    <div class="content" id="content">
+        <div id="home-content">
+            
+        </div>
+        <div id="about-content" class="hidden">
+           
+        </div>
+        <div id="services-content" class="hidden">
+           
+        </div>
+        <div id="contact-content" class="hidden">
+           
+        </div>
+    </div>
+    <script>
+        document.getElementById('home-tab').addEventListener('click', function() {
+            showContent('home-content');
+        });
+
+        document.getElementById('about-tab').addEventListener('click', function() {
+            showContent('about-content');
+        });
+
+        document.getElementById('services-tab').addEventListener('click', function() {
+            showContent('services-content');
+        });
+
+        document.getElementById('contact-tab').addEventListener('click', function() {
+            showContent('contact-content');
+        });
+
+        function showContent(contentId) {
+            var contents = document.querySelectorAll('.content > div');
+            contents.forEach(function(content) {
+                content.classList.add('hidden');
+            });
+            document.getElementById(contentId).classList.remove('hidden');
+
+            var tabs = document.querySelectorAll('.sidebar a');
+            tabs.forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+            document.getElementById(contentId.replace('-content', '-tab')).classList.add('active');
+        }
+
+        var toggleBtn = document.getElementById('toggle-btn');
+        var sidebar = document.querySelector('.sidebar');
+        var content = document.getElementById('content');
+
+        toggleBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+            toggleBtn.classList.toggle('collapsed');
+        });
+    </script>
+</body>
+</html>
