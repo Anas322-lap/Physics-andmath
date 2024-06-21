@@ -10,23 +10,17 @@
             margin: 0;
             padding: 0;
             background-color: #f0f0f0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             min-height: 100vh;
         }
         .navbar {
             background-color: #105fcd;
             color: #fff;
             padding: 15px 0;
-            width: 100%;
         }
         .navbar-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 80%;
+            max-width: 90%;
             margin: 0 auto;
+            overflow: hidden; /* ป้องกันเนื้อหาโดนขยายเกินขอบ */
         }
         .navbar-brand {
             font-size: 24px;
@@ -38,9 +32,10 @@
             margin: 0;
             padding: 0;
             display: flex;
+            justify-content: flex-end;
         }
         .navbar-item {
-            margin-left: 10px;
+            margin-left: 15px;
         }
         .navbar-link {
             text-decoration: none;
@@ -60,6 +55,9 @@
             text-align: center;
             margin-top: 20px;
             box-sizing: border-box;
+            max-width: 90%;
+            margin: 20px auto;
+            overflow: hidden; /* ป้องกันเนื้อหาโดนขยายเกินขอบ */
         }
         h1 {
             color: #333;
@@ -93,15 +91,22 @@
             color: #555;
         }
         .credit {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
             font-size: 12px;
             color: #888;
+            text-align: center;
+            margin-top: 20px;
         }
-        @media (min-width: 600px) {
+
+        @media (max-width: 600px) {
+            .navbar-menu {
+                justify-content: center;
+            }
+            .navbar-item {
+                margin-left: 0;
+                margin-right: 10px;
+            }
             .container {
-                max-width: 500px;
+                padding: 15px;
             }
         }
     </style>
@@ -213,7 +218,7 @@
                     result = 'ประเภทหน่วยไม่ถูกต้อง';
             }
 
-            document.getElementById('result').innerText = `ผลลัพธ์: ${result.toFixed(2)}`;
+            document.getElementById('result').innerText = `ผลลัพธ์: ${result.toFixed(2)}`; // แสดงผลลัพธ์ทศนิยม 2 ตำแหน่ง
         }
 
         function convertLength(value, fromUnit, toUnit) {
