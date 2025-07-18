@@ -1,238 +1,249 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>คำนวณอัตราเร็ว, ความเร็ว และความเร่ง</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #eef2f7;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .navbar {
-            background-color: #105fcd;
-            color: #fff;
-            padding: 15px 0;
-            width: 100%;
-        }
-        .navbar-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 90%;
-            margin: 0 auto;
-        }
-        .navbar-brand {
-            font-size: 24px;
-            text-decoration: none;
-            color: #fff;
-        }
-        .navbar-menu {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .navbar-item {
-            margin: 0 10px;
-        }
-        .navbar-link {
-            text-decoration: none;
-            color: #fff;
-            font-size: 18px;
-            transition: color 0.3s;
-        }
-        .navbar-link:hover {
-            color: #ddd;
-        }
-        .container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 90%;
-            width: 100%;
-            text-align: center;
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin: 10px;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .result {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #555;
-        }
-        .credit {
-            font-size: 12px;
-            color: #888;
-            margin-top: 20px;
-        }
-        .form-container {
-            display: none;
-            width: 100%;
-            max-width: 400px;
-            margin-top: 20px;
-        }
-        input[type="number"] {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin: 10px 0;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        @media (max-width: 600px) {
-            .navbar-container {
-                flex-direction: column;
-            }
-            .navbar-menu {
-                flex-direction: column;
-                align-items: center;
-            }
-            .navbar-item {
-                margin: 5px 0;
-            }
-            .container {
-                padding: 10px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ระบบคิดเงินร้านอาหาร</title>
+  <style>
+    body {
+      font-family: 'Sarabun', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-image: url('https://www.chillpainai.com/src/wewakeup/scoop/images/e2af1e1c73da15f8fb8a6ff1f0876346ac0144b6.jpg'); 
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-color: rgba(255, 255, 255, 0.85);
+      z-index: -1;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .table-select {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    select {
+      font-size: 16px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .menu-card {
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .menu-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #ddd;
+    }
+
+    .menu-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-text span {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .menu-text strong {
+      font-size: 16px;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    .total {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+    .clear-btn {
+      background: #e74c3c;
+    }
+
+    .clear-btn:hover {
+      background: #c0392b;
+    }
+    #qr {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+    #qr img {
+      max-width: 450px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-container">
-            <a href="#" class="navbar-brand">Physics and Math</a>
-            <ul class="navbar-menu">
-                <li class="navbar-item"><a href="index.html" class="navbar-link">หน้าหลัก</a></li>
-                <li class="navbar-item"><a href="zxzx.html" class="navbar-link">หาค.ร.น</a></li>
-                <li class="navbar-item"><a href="asas.html" class="navbar-link">การเปลี่ยนหน่วย</a></li>
-                <li class="navbar-item"><a href="liam.html" class="navbar-link">คำนวณมุมสามเหลี่ยม</a></li>
-                <li class="navbar-item"><a href="pita.html" class="navbar-link">คำนวณสามเหลี่ยมพีธาโกรัส</a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container">
-        <h1>คำนวณอัตราเร็ว, ความเร็ว และความเร่ง</h1>
-        <button onclick="showForm('speed')">คำนวณอัตราเร็ว</button>
-        <button onclick="showForm('velocity')">คำนวณความเร็ว</button>
-        <button onclick="showForm('acceleration')">คำนวณความเร่ง</button>
 
-        <div id="speedForm" class="form-container">
-            <h2>คำนวณอัตราเร็ว</h2>
-            <label for="distance">ระยะทาง (เมตร):</label>
-            <input type="number" id="distance">
-            <label for="time">เวลา (วินาที):</label>
-            <input type="number" id="time">
-            <button onclick="calculateSpeed()">คำนวณ</button>
-            <div class="result" id="speedResult"></div>
-        </div>
+  <h2>ระบบคิดเงินร้านอาหาร</h2>
 
-        <div id="velocityForm" class="form-container">
-            <h2>คำนวณความเร็ว</h2>
-            <label for="initialPosition">ตำแหน่งเริ่มต้น (เมตร):</label>
-            <input type="number" id="initialPosition">
-            <label for="finalPosition">ตำแหน่งสุดท้าย (เมตร):</label>
-            <input type="number" id="finalPosition">
-            <label for="velocityTime">เวลา (วินาที):</label>
-            <input type="number" id="velocityTime">
-            <button onclick="calculateVelocity()">คำนวณ</button>
-            <div class="result" id="velocityResult"></div>
-        </div>
+  <div class="table-select">
+    <label for="table-number">เลือกโต๊ะ: </label>
+    <select id="table-number">
+      <option value="">-- เลือกโต๊ะ --</option>
+      <option value="1">โต๊ะ 1</option>
+      <option value="2">โต๊ะ 2</option>
+      <option value="3">โต๊ะ 3</option>
+      <option value="4">โต๊ะ 4</option>
+      <option value="5">โต๊ะ 5</option>
+      <option value="6">โต๊ะ 6</option>
+      <option value="7">โต๊ะ 7</option>
+      <option value="8">โต๊ะ 8</option>
+      <option value="9">โต๊ะ 9</option>
+      <option value="10">โต๊ะ 10</option>
+    </select>
+  </div>
 
-        <div id="accelerationForm" class="form-container">
-            <h2>คำนวณความเร่ง</h2>
-            <label for="initialVelocity">ความเร็วต้น (เมตร/วินาที):</label>
-            <input type="number" id="initialVelocity">
-            <label for="finalVelocity">ความเร็วปลาย (เมตร/วินาที):</label>
-            <input type="number" id="finalVelocity">
-            <label for="accelerationTime">เวลา (วินาที):</label>
-            <input type="number" id="accelerationTime">
-            <button onclick="calculateAcceleration()">คำนวณ</button>
-            <div class="result" id="accelerationResult"></div>
+  <div class="menu-list">
+    <!-- เมนูอาหาร -->
+    <div class="menu-card">
+      <div class="menu-info">
+        <img src="https://images.deliveryhero.io/image/fd-th/LH/j6ya-hero.jpg" class="menu-img" alt="">
+        <div class="menu-text">
+          <strong>ข้าวกะเพรา</strong>
+          <span>50 บาท</span>
         </div>
+      </div>
+      <input type="number" id="menu1" value="0" min="0">
     </div>
-    <div class="credit">สร้างโดย Anas Masae</div>
 
-    <script>
-        function showForm(form) {
-            document.getElementById('speedForm').style.display = 'none';
-            document.getElementById('velocityForm').style.display = 'none';
-            document.getElementById('accelerationForm').style.display = 'none';
-            if (form === 'speed') {
-                document.getElementById('speedForm').style.display = 'block';
-            } else if (form === 'velocity') {
-                document.getElementById('velocityForm').style.display = 'block';
-            } else if (form === 'acceleration') {
-                document.getElementById('accelerationForm').style.display = 'block';
-            }
-        }
+    <div class="menu-card">
+      <div class="menu-info">
+        <img src="https://images.deliveryhero.io/image/fd-th/LH/ehnd-hero.jpg" class="menu-img" alt="">
+        <div class="menu-text">
+          <strong>ข้าวผัด</strong>
+          <span>45 บาท</span>
+        </div>
+      </div>
+      <input type="number" id="menu2" value="0" min="0">
+    </div>
 
-        function calculateSpeed() {
-            const distance = parseFloat(document.getElementById('distance').value);
-            const time = parseFloat(document.getElementById('time').value);
+    <div class="menu-card">
+      <div class="menu-info">
+        <img src="https://aroi-mark.com/wp-content/uploads/2021/12/oc9ecl2i3yt4Q1or4uX-o-1-e1638946064535.jpg" class="menu-img" alt="">
+        <div class="menu-text">
+          <strong>ต้มยำกุ้ง</strong>
+          <span>80 บาท</span>
+        </div>
+      </div>
+      <input type="number" id="menu3" value="0" min="0">
+    </div>
 
-            if (isNaN(distance) || isNaN(time) || time <= 0) {
-                document.getElementById('speedResult').innerText = "กรุณาใส่ระยะทางและเวลาที่ถูกต้อง";
-                return;
-            }
+    <div class="menu-card">
+      <div class="menu-info">
+        <img src="https://cf.shopee.co.th/file/91f350d63bf24ef66662870fb785246c" class="menu-img" alt="">
+        <div class="menu-text">
+          <strong>น้ำเปล่า</strong>
+          <span>10 บาท</span>
+        </div>
+      </div>
+      <input type="number" id="menu4" value="0" min="0">
+    </div>
+  </div>
 
-            const speed = distance / time;
-            document.getElementById('speedResult').innerText = `อัตราเร็ว = ${speed.toFixed(2)} เมตร/วินาที`;
-        }
+  <button onclick="calculateTotal()">คำนวณรวมเงิน</button>
+  <div class="total" id="result">รวมทั้งหมด: 0 บาท</div>
+  <button class="clear-btn" onclick="clearOrder()">ล้างรายการ</button>
 
-        function calculateVelocity() {
-            const initialPosition = parseFloat(document.getElementById('initialPosition').value);
-            const finalPosition = parseFloat(document.getElementById('finalPosition').value);
-            const time = parseFloat(document.getElementById('velocityTime').value);
+      <div id="qr">
+    <img src="22477df5-b40a-4e4c-90f2-c1539d166466.jpg" alt="QR Code">
+  </div>
 
-            if (isNaN(initialPosition) || isNaN(finalPosition) || isNaN(time) || time <= 0) {
-                document.getElementById('velocityResult').innerText = "กรุณาใส่ค่าตำแหน่งและเวลาที่ถูกต้อง";
-                return;
-            }
+  <script>
+    function calculateTotal() {
+      const table = document.getElementById("table-number").value;
+      const prices = [50, 45, 80, 10];
+      const quantities = [
+        +document.getElementById("menu1").value,
+        +document.getElementById("menu2").value,
+        +document.getElementById("menu3").value,
+        +document.getElementById("menu4").value
+      ];
 
-            const velocity = (finalPosition - initialPosition) / time;
-            document.getElementById('velocityResult').innerText = `ความเร็ว = ${velocity.toFixed(2)} เมตร/วินาที`;
-        }
+      let total = 0;
+      for (let i = 0; i < prices.length; i++) {
+        total += prices[i] * quantities[i];
+      }
 
-        function calculateAcceleration() {
-            const initialVelocity = parseFloat(document.getElementById('initialVelocity').value);
-            const finalVelocity = parseFloat(document.getElementById('finalVelocity').value);
-            const time = parseFloat(document.getElementById('accelerationTime').value);
+      const tableInfo = table ? ` (โต๊ะ ${table})` : '';
+      document.getElementById("result").innerText = `รวมทั้งหมด: ${total} บาท${tableInfo}`;
+       document.getElementById("qr").style.display = total > 0 ? 'block' : 'none';
+    }
 
-            if (isNaN(initialVelocity) || isNaN(finalVelocity) || isNaN(time) || time <= 0) {
-                document.getElementById('accelerationResult').innerText = "กรุณาใส่ค่าความเร็วและเวลาที่ถูกต้อง";
-                return;
-            }
+    function clearOrder() {
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById("menu" + i).value = 0;
+      }
+      document.getElementById("table-number").value = "";
+      document.getElementById("result").innerText = `รวมทั้งหมด: 0 บาท`;
+      document.getElementById("qr").style.display = 'none';
+    }
+  </script>
 
-            const acceleration = (finalVelocity - initialVelocity) / time;
-            document.getElementById('accelerationResult').innerText = `ความเร่ง = ${acceleration.toFixed(2)} เมตร/วินาที²`;
-        }
-    </script>
 </body>
 </html>
