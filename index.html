@@ -1,249 +1,119 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ระบบคิดเงินร้านอาหาร</title>
-  <style>
-    body {
-      font-family: 'Sarabun', sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-image: url('https://www.chillpainai.com/src/wewakeup/scoop/images/e2af1e1c73da15f8fb8a6ff1f0876346ac0144b6.jpg'); 
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aidus - ตรวจโรคต้อเนื้อ</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Prompt', sans-serif;
+            background: linear-gradient(to right, #4babe2ca, #7aa1cf);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        nav {
+          position: fixed;
+           top: 0;
+    left: 0;
+    width: 100%;
+    height: 39px;
+    padding: 1rem;
+   background: linear-gradient(to right, #b6caff, #b1ecff, #f3f3f3);
+    color: white;
+    z-index: 999; /* ให้อยู่บนสุดถ้าซ้อนกับอย่างอื่น */
+}
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    text-align: center;
+}
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        
+        }
+        .logo span {
+            color: #1976d2;
+        }
+        .title {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+       
+        .upload-box svg {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 12px;
+        }
+        .start-btn {
+    background: white;
+    border: 2px solid #d3d3d3;
+    border-radius: 40px;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none; /* เอาขีดเส้นใต้ลิงก์ออก */
+    color: black;
+    margin-top: 30px;
+}
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-color: rgba(255, 255, 255, 0.85);
-      z-index: -1;
-    }
-
-    h2 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 10px;
-    }
-
-    .table-select {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    select {
-      font-size: 16px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    .menu-list {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .menu-card {
-      background: white;
-      border-radius: 12px;
-      padding: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .menu-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .menu-img {
-      width: 50px;
-      height: 50px;
-      border-radius: 10px;
-      object-fit: cover;
-      background: #ddd;
-    }
-
-    .menu-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .menu-text span {
-      font-size: 14px;
-      color: #555;
-    }
-
-    .menu-text strong {
-      font-size: 16px;
-    }
-
-    input[type="number"] {
-      width: 60px;
-      padding: 5px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      text-align: center;
-    }
-
-    .total {
-      font-size: 20px;
-      font-weight: bold;
-      margin-top: 20px;
-      text-align: center;
-      color: #2c3e50;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      background: #4CAF50;
-      color: white;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #45a049;
-    }
-
-    .clear-btn {
-      background: #e74c3c;
-    }
-
-    .clear-btn:hover {
-      background: #c0392b;
-    }
-    #qr {
-      display: none;
-      text-align: center;
-      margin-top: 20px;
-    }
-    #qr img {
-      max-width: 450px;
-      border-radius: 12px;
-      border: 1px solid #ccc;
-    }
-  </style>
+        .start-btn:hover {
+            background: #f3f3f3;
+        }
+        .bottom-img img {
+            width: 70%;
+            max-width: 280px;
+             opacity: 0.8; /* ยิ่งต่ำยิ่งจาง */
+             display: block;
+              margin: 0 auto;
+        }
+        .bottom-img img {
+           width: 250px; /* หรือปรับขนาดตามต้องการ */
+        }
+         .eye-image {
+            margin-top: 20px;
+            width: 110%;
+            max-width: 350px;
+            border-radius: 20px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+             display: flex;
+             justify-content: center;
+        }
+    </style>
+  
+     
 </head>
 <body>
+       <nav>
+          <div class="container">
+                 <div class="logo"><span>Ai</span><span style="color: black;">dus</span></div>
+          </div>
+        </nav>
+    
+    <div class="title">วิเคราะห์ปัญหา<br>โรคต้อเนื้อเบื้องต้น</div>
 
-  <h2>ระบบคิดเงินร้านอาหาร</h2>
-
-  <div class="table-select">
-    <label for="table-number">เลือกโต๊ะ: </label>
-    <select id="table-number">
-      <option value="">-- เลือกโต๊ะ --</option>
-      <option value="1">โต๊ะ 1</option>
-      <option value="2">โต๊ะ 2</option>
-      <option value="3">โต๊ะ 3</option>
-      <option value="4">โต๊ะ 4</option>
-      <option value="5">โต๊ะ 5</option>
-      <option value="6">โต๊ะ 6</option>
-      <option value="7">โต๊ะ 7</option>
-      <option value="8">โต๊ะ 8</option>
-      <option value="9">โต๊ะ 9</option>
-      <option value="10">โต๊ะ 10</option>
-    </select>
-  </div>
-
-  <div class="menu-list">
-    <!-- เมนูอาหาร -->
-    <div class="menu-card">
-      <div class="menu-info">
-        <img src="https://images.deliveryhero.io/image/fd-th/LH/j6ya-hero.jpg" class="menu-img" alt="">
-        <div class="menu-text">
-          <strong>ข้าวกะเพรา</strong>
-          <span>50 บาท</span>
-        </div>
-      </div>
-      <input type="number" id="menu1" value="0" min="0">
+    <div class="upload-box">
+       <img class="eye-image" src="สกรีนช็อต 2025-07-18 143951.png" >
     </div>
 
-    <div class="menu-card">
-      <div class="menu-info">
-        <img src="https://images.deliveryhero.io/image/fd-th/LH/ehnd-hero.jpg" class="menu-img" alt="">
-        <div class="menu-text">
-          <strong>ข้าวผัด</strong>
-          <span>45 บาท</span>
-        </div>
-      </div>
-      <input type="number" id="menu2" value="0" min="0">
+   <a href="two.html" class="start-btn">
+    เริ่มตรวจจับ <span style="font-size:22px;">👆</span>
+</a>
+    <div class="bottom-img">
+        <img src="https://png.pngtree.com/png-vector/20190120/ourmid/pngtree-vision-is-being-measured-love-the-eyes-vision-eye-of-love-png-image_484812.png" alt="ตรวจสายตา">
     </div>
-
-    <div class="menu-card">
-      <div class="menu-info">
-        <img src="https://aroi-mark.com/wp-content/uploads/2021/12/oc9ecl2i3yt4Q1or4uX-o-1-e1638946064535.jpg" class="menu-img" alt="">
-        <div class="menu-text">
-          <strong>ต้มยำกุ้ง</strong>
-          <span>80 บาท</span>
-        </div>
-      </div>
-      <input type="number" id="menu3" value="0" min="0">
-    </div>
-
-    <div class="menu-card">
-      <div class="menu-info">
-        <img src="https://cf.shopee.co.th/file/91f350d63bf24ef66662870fb785246c" class="menu-img" alt="">
-        <div class="menu-text">
-          <strong>น้ำเปล่า</strong>
-          <span>10 บาท</span>
-        </div>
-      </div>
-      <input type="number" id="menu4" value="0" min="0">
-    </div>
-  </div>
-
-  <button onclick="calculateTotal()">คำนวณรวมเงิน</button>
-  <div class="total" id="result">รวมทั้งหมด: 0 บาท</div>
-  <button class="clear-btn" onclick="clearOrder()">ล้างรายการ</button>
-
-      <div id="qr">
-    <img src="22477df5-b40a-4e4c-90f2-c1539d166466.jpg" alt="QR Code">
-  </div>
-
-  <script>
-    function calculateTotal() {
-      const table = document.getElementById("table-number").value;
-      const prices = [50, 45, 80, 10];
-      const quantities = [
-        +document.getElementById("menu1").value,
-        +document.getElementById("menu2").value,
-        +document.getElementById("menu3").value,
-        +document.getElementById("menu4").value
-      ];
-
-      let total = 0;
-      for (let i = 0; i < prices.length; i++) {
-        total += prices[i] * quantities[i];
-      }
-
-      const tableInfo = table ? ` (โต๊ะ ${table})` : '';
-      document.getElementById("result").innerText = `รวมทั้งหมด: ${total} บาท${tableInfo}`;
-       document.getElementById("qr").style.display = total > 0 ? 'block' : 'none';
-    }
-
-    function clearOrder() {
-      for (let i = 1; i <= 4; i++) {
-        document.getElementById("menu" + i).value = 0;
-      }
-      document.getElementById("table-number").value = "";
-      document.getElementById("result").innerText = `รวมทั้งหมด: 0 บาท`;
-      document.getElementById("qr").style.display = 'none';
-    }
-  </script>
 
 </body>
 </html>
